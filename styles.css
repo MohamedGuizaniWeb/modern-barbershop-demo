@@ -274,3 +274,14 @@ details p{margin:0 0 18px;color:var(--muted)}
   .custom-menu{position:static;display:none;margin-top:6px}
   .custom-menu.open{display:block}
 }
+
+
+/* Clean opening-hours layout */
+.hours-list{
+  display:grid;
+  gap:6px;
+}
+.hours-list span{
+  color:var(--muted);
+  font-size:14px;
+}
