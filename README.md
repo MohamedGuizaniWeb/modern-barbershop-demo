@@ -36,3 +36,7 @@ Cream, black and deep-red editorial identity. This version is intentionally very
 
 ## Booking system
 The Contact page now includes service, barber, date and time selection. A Cloudflare D1 backend is included inside `booking-backend/` for real shared reservations. See `booking-backend/SETUP.md`.
+
+
+## Appointment dropdown update
+The date/time picker now opens and closes like the Service and Barber custom selectors. After a customer chooses a time, the field displays the selected appointment.

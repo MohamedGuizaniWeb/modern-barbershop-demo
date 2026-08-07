@@ -481,3 +481,118 @@ details p{margin:0 0 18px;color:var(--muted)}
   .date-strip{grid-template-columns:repeat(2,1fr)}
   .time-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+
+/* Appointment selector: opens like Service / Barber */
+.appointment-field{
+  position:relative;
+  margin-bottom:14px;
+}
+.appointment-select-btn{
+  width:100%;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:0;
+  background:transparent;
+  color:var(--ink);
+  text-align:left;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.appointment-select-btn:hover,
+.appointment-select-btn[aria-expanded="true"]{
+  border-color:var(--red);
+  box-shadow:0 0 0 2px rgba(169,52,43,.08);
+  background:rgba(169,52,43,.025);
+}
+.appointment-select-btn > span{
+  display:grid;
+  gap:3px;
+}
+.appointment-select-btn strong{
+  font-size:14px;
+  color:var(--ink);
+}
+.appointment-select-btn small{
+  color:var(--muted);
+  font-size:10.5px;
+}
+.appointment-menu{
+  position:absolute;
+  z-index:90;
+  left:0;
+  right:0;
+  top:calc(100% - 1px);
+  max-height:590px;
+  overflow:auto;
+  padding:18px;
+  border:1px solid var(--ink);
+  background:var(--paper);
+  box-shadow:var(--shadow);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transform-origin:top;
+  transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+.appointment-menu.open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(6px);
+}
+.appointment-menu-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--line);
+}
+.appointment-menu-head > div{
+  display:grid;
+  gap:3px;
+}
+.appointment-menu-head strong{
+  font-family:"Bodoni Moda",serif;
+  font-size:23px;
+  line-height:1;
+}
+.menu-kicker{
+  color:var(--red) !important;
+  font-size:8px !important;
+  font-weight:800 !important;
+  letter-spacing:.12em !important;
+}
+.appointment-field .booking-step{
+  padding-top:18px;
+}
+.appointment-field .booking-summary{
+  margin-top:16px;
+}
+.appointment-select-btn.has-selection{
+  border-color:rgba(60,122,88,.5);
+  background:rgba(60,122,88,.035);
+}
+.appointment-select-btn.has-selection strong{
+  color:#2f6949;
+}
+@media(max-width:700px){
+  .appointment-menu{
+    position:static;
+    display:none;
+    max-height:none;
+    margin-top:6px;
+    transform:none;
+  }
+  .appointment-menu.open{
+    display:block;
+    transform:none;
+  }
+  .appointment-menu-head{
+    display:grid;
+  }
+}

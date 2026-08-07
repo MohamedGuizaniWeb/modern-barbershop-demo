@@ -17,6 +17,10 @@ const timeGrid = document.getElementById("time-grid");
 const timeHelp = document.getElementById("time-help");
 const bookingSummaryText = document.getElementById("booking-summary-text");
 const availabilityPill = document.getElementById("availability-pill");
+const appointmentTrigger = document.getElementById("appointment-trigger");
+const appointmentMenu = document.getElementById("appointment-menu");
+const appointmentSelectedTitle = document.getElementById("appointment-selected-title");
+const appointmentSelectedSub = document.getElementById("appointment-selected-sub");
 
 let selectedDate = "";
 let selectedTime = "";
@@ -105,6 +109,8 @@ function selectCustomOption(key, option){
     if (bookingTimeInput) bookingTimeInput.value = "";
     renderTimes();
     updateBookingSummary();
+    updateAppointmentField();
+    closeAppointmentMenu();
   }
 
   if (key === "service"){
@@ -115,6 +121,7 @@ function selectCustomOption(key, option){
 Object.entries(customSelects).forEach(([key, field]) => {
   field.trigger?.addEventListener("click", () => {
     const willOpen = !field.menu.classList.contains("open");
+    closeAppointmentMenu();
     closeCustomMenus(willOpen ? key : null);
     field.menu.classList.toggle("open", willOpen);
     field.trigger.setAttribute("aria-expanded", String(willOpen));
@@ -196,11 +203,57 @@ function applyLanguage(nextLanguage){
   renderDates();
   if (selectedDate) renderTimes();
   updateBookingSummary();
+  updateAppointmentField();
   setAvailabilityMode(availabilityMode === "demo" ? "demo" : "live");
 
   if (formStatus) formStatus.textContent = "";
 }
 
+
+function closeAppointmentMenu(){
+  if (!appointmentMenu || !appointmentTrigger) return;
+  appointmentMenu.classList.remove("open");
+  appointmentTrigger.setAttribute("aria-expanded","false");
+}
+
+appointmentTrigger?.addEventListener("click", () => {
+  const willOpen = !appointmentMenu.classList.contains("open");
+  closeCustomMenus();
+
+  appointmentMenu.classList.toggle("open", willOpen);
+  appointmentTrigger.setAttribute("aria-expanded", String(willOpen));
+
+  if (willOpen){
+    renderDates();
+    renderTimes();
+  }
+});
+
+function updateAppointmentField(){
+  if (!appointmentSelectedTitle || !appointmentSelectedSub || !appointmentTrigger) return;
+
+  const barber = customSelects.barber.value?.value || "";
+
+  if (!selectedDate || !selectedTime){
+    appointmentSelectedTitle.textContent =
+      language === "fr" ? "Choisir une date et une heure" : "Choose a date & time";
+    appointmentSelectedSub.textContent =
+      language === "fr"
+        ? "Choisissez un rendez-vous disponible après avoir sélectionné votre barbier"
+        : "Select an available appointment after choosing your barber";
+    appointmentTrigger.classList.remove("has-selection");
+    return;
+  }
+
+  appointmentSelectedTitle.textContent =
+    `${prettyDate(selectedDate)} • ${selectedTime}`;
+
+  appointmentSelectedSub.textContent = barber
+    ? (language === "fr" ? `Avec ${barber}` : `With ${barber}`)
+    : (language === "fr" ? "Barbier à sélectionner" : "Barber not selected");
+
+  appointmentTrigger.classList.add("has-selection");
+}
 
 function apiUrl(path){
   return `${BOOKING_API_BASE}${path}`;
@@ -359,6 +412,7 @@ function renderDates(){
       renderDates();
       await renderTimes();
       updateBookingSummary();
+      updateAppointmentField();
     });
 
     dateStrip.appendChild(button);
@@ -410,6 +464,11 @@ async function renderTimes(){
       document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));
       button.classList.add("selected");
       updateBookingSummary();
+      updateAppointmentField();
+
+      // Close after a complete appointment is selected,
+      // matching the Service and Barber menu behavior.
+      window.setTimeout(closeAppointmentMenu, 140);
     });
 
     timeGrid.appendChild(button);
@@ -442,6 +501,8 @@ function resetBookingPicker(){
     timeGrid.innerHTML = `<p class="empty-times">${messages[language].chooseBarberDate}</p>`;
   }
   updateBookingSummary();
+  updateAppointmentField();
+  closeAppointmentMenu();
 }
 
 async function createReservation(payload){
@@ -490,10 +551,14 @@ langButton?.addEventListener("click", () => {
 
 document.addEventListener("click", (event) => {
   if (!event.target.closest(".custom-select-field")) closeCustomMenus();
+  if (!event.target.closest(".appointment-field")) closeAppointmentMenu();
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeCustomMenus();
+  if (event.key === "Escape"){
+    closeCustomMenus();
+    closeAppointmentMenu();
+  }
 });
 
 form?.addEventListener("submit", async (event) => {
@@ -588,3 +653,5 @@ if (year) year.textContent = new Date().getFullYear();
 
 renderDates();
 resetBookingPicker();
+
+updateAppointmentField();
