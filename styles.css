@@ -596,3 +596,18 @@ details p{margin:0 0 18px;color:var(--muted)}
     display:grid;
   }
 }
+
+
+/* Ensure the time options remain easy to click after a date is selected */
+.appointment-menu.open{
+  pointer-events:auto;
+}
+.date-card,
+.time-slot{
+  position:relative;
+  z-index:2;
+  pointer-events:auto;
+}
+.time-grid{
+  scroll-margin-block:18px;
+}

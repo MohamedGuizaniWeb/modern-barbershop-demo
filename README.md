@@ -44,3 +44,7 @@ The date/time picker now opens and closes like the Service and Barber custom sel
 
 ## Appointment menu behavior
 Selecting a date now keeps the menu open. The menu closes automatically only after an available time is selected.
+
+
+## Final appointment behavior fix
+Selecting a date always keeps the appointment menu open. The menu closes only after an available hour is selected (or the user manually toggles it / presses Escape).

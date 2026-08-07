@@ -210,6 +210,12 @@ function applyLanguage(nextLanguage){
 }
 
 
+function openAppointmentMenu(){
+  if (!appointmentMenu || !appointmentTrigger) return;
+  appointmentMenu.classList.add("open");
+  appointmentTrigger.setAttribute("aria-expanded","true");
+}
+
 function closeAppointmentMenu(){
   if (!appointmentMenu || !appointmentTrigger) return;
   appointmentMenu.classList.remove("open");
@@ -217,16 +223,18 @@ function closeAppointmentMenu(){
 }
 
 appointmentTrigger?.addEventListener("click", (event) => {
+  event.preventDefault();
   event.stopPropagation();
+
   const willOpen = !appointmentMenu.classList.contains("open");
   closeCustomMenus();
 
-  appointmentMenu.classList.toggle("open", willOpen);
-  appointmentTrigger.setAttribute("aria-expanded", String(willOpen));
-
   if (willOpen){
+    openAppointmentMenu();
     renderDates();
     renderTimes();
+  } else {
+    closeAppointmentMenu();
   }
 });
 
@@ -410,15 +418,28 @@ function renderDates(){
     `;
 
     button.addEventListener("click", async (event) => {
+      event.preventDefault();
       event.stopPropagation();
+
       selectedDate = value;
       selectedTime = "";
       bookingDateInput.value = value;
       bookingTimeInput.value = "";
+
+      // Keep the picker open while the available hours load.
+      openAppointmentMenu();
       renderDates();
       await renderTimes();
       updateBookingSummary();
       updateAppointmentField();
+
+      // Force it to remain open after the async availability check.
+      openAppointmentMenu();
+
+      // Bring the available hours into view inside the open menu.
+      if (timeGrid){
+        timeGrid.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
     });
 
     dateStrip.appendChild(button);
@@ -465,7 +486,9 @@ async function renderTimes(){
     button.disabled = booked.includes(time);
 
     button.addEventListener("click", (event) => {
+      event.preventDefault();
       event.stopPropagation();
+
       selectedTime = time;
       bookingTimeInput.value = time;
       document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));
@@ -473,9 +496,8 @@ async function renderTimes(){
       updateBookingSummary();
       updateAppointmentField();
 
-      // Close after a complete appointment is selected,
-      // matching the Service and Barber menu behavior.
-      window.setTimeout(closeAppointmentMenu, 140);
+      // This is the only selection step that closes the appointment menu.
+      window.setTimeout(closeAppointmentMenu, 120);
     });
 
     timeGrid.appendChild(button);
@@ -558,7 +580,6 @@ langButton?.addEventListener("click", () => {
 
 document.addEventListener("click", (event) => {
   if (!event.target.closest(".custom-select-field")) closeCustomMenus();
-  if (!event.target.closest(".appointment-field")) closeAppointmentMenu();
 });
 
 document.addEventListener("keydown", (event) => {
