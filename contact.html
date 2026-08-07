@@ -259,6 +259,46 @@
             </button>
           </div>
         </div>
+        <div class="appointment-picker">
+          <div class="booking-heading">
+            <div>
+              <span class="select-label" data-en="Appointment" data-fr="Rendez-vous">Appointment</span>
+              <strong data-en="Choose a date and available time" data-fr="Choisissez une date et une heure disponible">Choose a date and available time</strong>
+            </div>
+            <span class="availability-pill" id="availability-pill" data-en="Live availability" data-fr="Disponibilité en direct">Live availability</span>
+          </div>
+
+          <input type="hidden" name="date" id="booking-date" />
+          <input type="hidden" name="time" id="booking-time" />
+
+          <div class="booking-step">
+            <div class="booking-step-title">
+              <span>01</span>
+              <p>
+                <strong data-en="Select a date" data-fr="Choisir une date">Select a date</strong>
+                <small data-en="Available booking days for the next two weeks" data-fr="Jours disponibles pour les deux prochaines semaines">Available booking days for the next two weeks</small>
+              </p>
+            </div>
+            <div class="date-strip" id="date-strip" aria-label="Available appointment dates"></div>
+          </div>
+
+          <div class="booking-step">
+            <div class="booking-step-title">
+              <span>02</span>
+              <p>
+                <strong data-en="Select a time" data-fr="Choisir une heure">Select a time</strong>
+                <small id="time-help" data-en="Choose a barber and date to see available times" data-fr="Choisissez un barbier et une date pour voir les heures disponibles">Choose a barber and date to see available times</small>
+              </p>
+            </div>
+            <div class="time-grid" id="time-grid"></div>
+          </div>
+
+          <div class="booking-summary" id="booking-summary">
+            <span data-en="Appointment summary" data-fr="Résumé du rendez-vous">Appointment summary</span>
+            <strong id="booking-summary-text" data-en="No time selected yet" data-fr="Aucune heure sélectionnée">No time selected yet</strong>
+          </div>
+        </div>
+
         <label>
           <span data-en="Message" data-fr="Message">Message</span>
           <textarea name="message" placeholder="Tell us which service you want and your preferred time."></textarea>

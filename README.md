@@ -32,3 +32,7 @@ This is a portfolio demo site. Brand name, address, phone, email, team members, 
 
 ## Editorial redesign
 Cream, black and deep-red editorial identity. This version is intentionally very different from the auto-detailing demo.
+
+
+## Booking system
+The Contact page now includes service, barber, date and time selection. A Cloudflare D1 backend is included inside `booking-backend/` for real shared reservations. See `booking-backend/SETUP.md`.

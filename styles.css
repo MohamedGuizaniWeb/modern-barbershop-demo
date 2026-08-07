@@ -285,3 +285,199 @@ details p{margin:0 0 18px;color:var(--muted)}
   color:var(--muted);
   font-size:14px;
 }
+
+
+/* Professional appointment date/time picker */
+.appointment-picker{
+  margin:4px 0 18px;
+  padding:22px;
+  border:1px solid var(--ink);
+  background:rgba(243,238,229,.42);
+}
+.booking-heading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:18px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+.booking-heading > div{
+  display:grid;
+  gap:3px;
+}
+.booking-heading > div > strong{
+  font-family:"Bodoni Moda",serif;
+  font-size:22px;
+  line-height:1.05;
+}
+.availability-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  flex:0 0 auto;
+  padding:7px 9px;
+  border:1px solid rgba(60,122,88,.28);
+  background:rgba(60,122,88,.07);
+  color:#3c7a58 !important;
+  font-size:8px !important;
+  font-weight:800 !important;
+  letter-spacing:.09em !important;
+  text-transform:uppercase;
+}
+.availability-pill::before{
+  content:"";
+  width:6px;height:6px;
+  border-radius:50%;
+  background:#3c7a58;
+}
+.availability-pill.demo{
+  border-color:rgba(169,52,43,.23);
+  background:rgba(169,52,43,.06);
+  color:var(--red) !important;
+}
+.availability-pill.demo::before{background:var(--red)}
+.booking-step{
+  padding-top:20px;
+}
+.booking-step + .booking-step{
+  margin-top:16px;
+  border-top:1px solid var(--line);
+}
+.booking-step-title{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:14px;
+}
+.booking-step-title > span{
+  width:29px;height:29px;
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  border:1px solid var(--red);
+  color:var(--red) !important;
+  font-size:9px !important;
+  font-weight:800 !important;
+}
+.booking-step-title p{
+  display:grid;
+  margin:0;
+  line-height:1.25;
+}
+.booking-step-title strong{
+  font-size:12px;
+  color:var(--ink);
+}
+.booking-step-title small{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:10px;
+}
+.date-strip{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+.date-card{
+  min-height:78px;
+  display:grid;
+  place-items:center;
+  gap:0;
+  padding:9px 5px;
+  border:1px solid var(--line);
+  background:rgba(255,253,248,.72);
+  color:var(--ink);
+  text-align:center;
+  transition:.18s ease;
+}
+.date-card:hover{
+  border-color:var(--red);
+  transform:translateY(-2px);
+}
+.date-card.selected{
+  background:var(--ink);
+  border-color:var(--ink);
+  color:var(--white);
+}
+.date-card .day{
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  opacity:.66;
+}
+.date-card .num{
+  font-family:"Bodoni Moda",serif;
+  font-size:25px;
+  line-height:1;
+}
+.date-card .month{
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.time-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.time-slot{
+  min-height:43px;
+  border:1px solid var(--line);
+  background:rgba(255,253,248,.76);
+  color:var(--ink);
+  font-size:11px;
+  font-weight:700;
+  transition:.18s ease;
+}
+.time-slot:hover:not(:disabled){
+  border-color:var(--red);
+}
+.time-slot.selected{
+  background:var(--red);
+  border-color:var(--red);
+  color:var(--white);
+}
+.time-slot:disabled{
+  cursor:not-allowed;
+  opacity:.33;
+  text-decoration:line-through;
+}
+.empty-times{
+  grid-column:1/-1;
+  margin:0;
+  padding:14px;
+  border:1px dashed var(--line);
+  color:var(--muted);
+  font-size:11px;
+  text-align:center;
+}
+.booking-summary{
+  display:grid;
+  gap:3px;
+  margin-top:18px;
+  padding:14px 16px;
+  background:var(--ink);
+  color:var(--white);
+}
+.booking-summary span{
+  color:#aaa197 !important;
+  font-size:8px !important;
+  letter-spacing:.12em !important;
+}
+.booking-summary strong{
+  font-family:"Bodoni Moda",serif;
+  font-size:17px;
+}
+@media(max-width:700px){
+  .date-strip{grid-template-columns:repeat(3,1fr)}
+  .time-grid{grid-template-columns:repeat(3,1fr)}
+  .booking-heading{display:grid}
+  .availability-pill{width:max-content}
+}
+@media(max-width:420px){
+  .appointment-picker{padding:16px}
+  .date-strip{grid-template-columns:repeat(2,1fr)}
+  .time-grid{grid-template-columns:repeat(2,1fr)}
+}

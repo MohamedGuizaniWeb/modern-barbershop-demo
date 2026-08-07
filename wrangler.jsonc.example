@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "aurel-booking-api",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-07",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "aurel-bookings",
+      "database_id": "PASTE_YOUR_D1_DATABASE_ID_HERE"
+    }
+  ]
+}
