@@ -216,7 +216,8 @@ function closeAppointmentMenu(){
   appointmentTrigger.setAttribute("aria-expanded","false");
 }
 
-appointmentTrigger?.addEventListener("click", () => {
+appointmentTrigger?.addEventListener("click", (event) => {
+  event.stopPropagation();
   const willOpen = !appointmentMenu.classList.contains("open");
   closeCustomMenus();
 
@@ -227,6 +228,10 @@ appointmentTrigger?.addEventListener("click", () => {
     renderDates();
     renderTimes();
   }
+});
+
+appointmentMenu?.addEventListener("click", (event) => {
+  event.stopPropagation();
 });
 
 function updateAppointmentField(){
@@ -404,7 +409,8 @@ function renderDates(){
       <span class="month">${parts.month}</span>
     `;
 
-    button.addEventListener("click", async () => {
+    button.addEventListener("click", async (event) => {
+      event.stopPropagation();
       selectedDate = value;
       selectedTime = "";
       bookingDateInput.value = value;
@@ -458,7 +464,8 @@ async function renderTimes(){
     button.textContent = time;
     button.disabled = booked.includes(time);
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
       selectedTime = time;
       bookingTimeInput.value = time;
       document.querySelectorAll(".time-slot").forEach(slot => slot.classList.remove("selected"));

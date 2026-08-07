@@ -40,3 +40,7 @@ The Contact page now includes service, barber, date and time selection. A Cloudf
 
 ## Appointment dropdown update
 The date/time picker now opens and closes like the Service and Barber custom selectors. After a customer chooses a time, the field displays the selected appointment.
+
+
+## Appointment menu behavior
+Selecting a date now keeps the menu open. The menu closes automatically only after an available time is selected.
