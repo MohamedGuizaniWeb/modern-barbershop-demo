@@ -29,3 +29,6 @@ This is a portfolio demo site. Brand name, address, phone, email, team members, 
 
 ## Suggested repository name
 `modern-barbershop-demo`
+
+## Editorial redesign
+Cream, black and deep-red editorial identity. This version is intentionally very different from the auto-detailing demo.
