@@ -121,16 +121,145 @@
           <span data-en="Email" data-fr="Courriel">Email</span>
           <input type="email" name="email" required placeholder="you@example.com" />
         </label>
-        <label>
-          <span data-en="Service" data-fr="Service">Service</span>
-          <select name="service" required>
-            <option value="" data-en="Choose a service" data-fr="Choisir un service">Choose a service</option>
-            <option data-en="Classic Cut" data-fr="Coupe classique">Classic Cut</option>
-            <option data-en="Beard Sculpt" data-fr="Sculpture de barbe">Beard Sculpt</option>
-            <option data-en="Signature Package" data-fr="Forfait Signature">Signature Package</option>
-            <option data-en="Executive Package" data-fr="Forfait Exécutif">Executive Package</option>
-          </select>
-        </label>
+        <div class="custom-select-field">
+          <span class="select-label" data-en="Service" data-fr="Service">Service</span>
+          <input type="hidden" name="service" id="service-value" />
+
+          <button class="custom-select-btn" id="service-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span>
+              <strong id="service-selected-title" data-en="Choose a service" data-fr="Choisir un service">Choose a service</strong>
+              <small id="service-selected-sub" data-en="Select the service the client wants to book" data-fr="Choisissez le service que le client veut réserver">Select the service the client wants to book</small>
+            </span>
+            <i class="select-chevron" aria-hidden="true"></i>
+          </button>
+
+          <div class="custom-menu" id="service-menu" role="listbox" aria-label="Service options">
+            <button class="custom-option" type="button" role="option"
+                    data-select="service"
+                    data-value="Classic Cut"
+                    data-title-en="Classic Cut"
+                    data-title-fr="Coupe classique"
+                    data-sub-en="$35 • Clean everyday haircut with style finish."
+                    data-sub-fr="35 $ • Coupe soignée de tous les jours avec finition coiffage.">
+              <span class="option-copy">
+                <strong data-en="Classic Cut" data-fr="Coupe classique">Classic Cut</strong>
+                <small data-en="Clean everyday haircut with style finish." data-fr="Coupe soignée de tous les jours avec finition coiffage.">Clean everyday haircut with style finish.</small>
+              </span>
+              <span class="option-meta">$35</span>
+            </button>
+
+            <button class="custom-option" type="button" role="option"
+                    data-select="service"
+                    data-value="Beard Sculpt"
+                    data-title-en="Beard Sculpt"
+                    data-title-fr="Sculpture de barbe"
+                    data-sub-en="$25 • Detailed shaping and razor-clean lines."
+                    data-sub-fr="25 $ • Mise en forme détaillée et contours nets au rasoir.">
+              <span class="option-copy">
+                <strong data-en="Beard Sculpt" data-fr="Sculpture de barbe">Beard Sculpt</strong>
+                <small data-en="Detailed shaping and razor-clean lines." data-fr="Mise en forme détaillée et contours nets au rasoir.">Detailed shaping and razor-clean lines.</small>
+              </span>
+              <span class="option-meta">$25</span>
+            </button>
+
+            <button class="custom-option featured-option" type="button" role="option"
+                    data-select="service"
+                    data-value="Signature Package"
+                    data-title-en="Signature Package"
+                    data-title-fr="Forfait Signature"
+                    data-sub-en="$55 • Cut, beard sculpt and hot towel finish."
+                    data-sub-fr="55 $ • Coupe, barbe et finition serviette chaude.">
+              <span class="option-copy">
+                <span class="recommended" data-en="MOST POPULAR" data-fr="LE PLUS POPULAIRE">MOST POPULAR</span>
+                <strong data-en="Signature Package" data-fr="Forfait Signature">Signature Package</strong>
+                <small data-en="Cut, beard sculpt and hot towel finish." data-fr="Coupe, barbe et finition serviette chaude.">Cut, beard sculpt and hot towel finish.</small>
+              </span>
+              <span class="option-meta">$55</span>
+            </button>
+
+            <button class="custom-option" type="button" role="option"
+                    data-select="service"
+                    data-value="Executive Package"
+                    data-title-en="Executive Package"
+                    data-title-fr="Forfait Exécutif"
+                    data-sub-en="$80 • Full premium grooming experience."
+                    data-sub-fr="80 $ • Expérience grooming premium complète.">
+              <span class="option-copy">
+                <strong data-en="Executive Package" data-fr="Forfait Exécutif">Executive Package</strong>
+                <small data-en="Full premium grooming experience." data-fr="Expérience grooming premium complète.">Full premium grooming experience.</small>
+              </span>
+              <span class="option-meta">$80</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="custom-select-field">
+          <span class="select-label" data-en="Barber" data-fr="Barbier">Barber</span>
+          <input type="hidden" name="barber" id="barber-value" />
+
+          <button class="custom-select-btn" id="barber-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span>
+              <strong id="barber-selected-title" data-en="Choose a barber" data-fr="Choisir un barbier">Choose a barber</strong>
+              <small id="barber-selected-sub" data-en="Select the barber the client prefers" data-fr="Choisissez le barbier préféré du client">Select the barber the client prefers</small>
+            </span>
+            <i class="select-chevron" aria-hidden="true"></i>
+          </button>
+
+          <div class="custom-menu" id="barber-menu" role="listbox" aria-label="Barber options">
+            <button class="custom-option featured-option" type="button" role="option"
+                    data-select="barber"
+                    data-value="Adam Laurent"
+                    data-title-en="Adam Laurent"
+                    data-title-fr="Adam Laurent"
+                    data-sub-en="Founder / Master Barber • Clean fades and refined precision work."
+                    data-sub-fr="Fondateur / Barbier maître • Dégradés nets et travail de précision raffiné.">
+              <span class="option-copy">
+                <span class="recommended" data-en="MOST REQUESTED" data-fr="LE PLUS DEMANDÉ">MOST REQUESTED</span>
+                <strong>Adam Laurent</strong>
+                <small data-en="Founder / Master Barber • Clean fades and refined precision work." data-fr="Fondateur / Barbier maître • Dégradés nets et travail de précision raffiné.">Founder / Master Barber • Clean fades and refined precision work.</small>
+              </span>
+            </button>
+
+            <button class="custom-option" type="button" role="option"
+                    data-select="barber"
+                    data-value="Marc Desjardins"
+                    data-title-en="Marc Desjardins"
+                    data-title-fr="Marc Desjardins"
+                    data-sub-en="Senior Barber • Beard sculpting, classic cuts and razor details."
+                    data-sub-fr="Barbier senior • Sculpture de barbe, coupes classiques et détails au rasoir.">
+              <span class="option-copy">
+                <strong>Marc Desjardins</strong>
+                <small data-en="Senior Barber • Beard sculpting, classic cuts and razor details." data-fr="Barbier senior • Sculpture de barbe, coupes classiques et détails au rasoir.">Senior Barber • Beard sculpting, classic cuts and razor details.</small>
+              </span>
+            </button>
+
+            <button class="custom-option" type="button" role="option"
+                    data-select="barber"
+                    data-value="Yanis Beaulieu"
+                    data-title-en="Yanis Beaulieu"
+                    data-title-fr="Yanis Beaulieu"
+                    data-sub-en="Stylist / Grooming Specialist • Texture, styling and modern finishes."
+                    data-sub-fr="Styliste / Spécialiste grooming • Texture, coiffage et finitions modernes.">
+              <span class="option-copy">
+                <strong>Yanis Beaulieu</strong>
+                <small data-en="Stylist / Grooming Specialist • Texture, styling and modern finishes." data-fr="Styliste / Spécialiste grooming • Texture, coiffage et finitions modernes.">Stylist / Grooming Specialist • Texture, styling and modern finishes.</small>
+              </span>
+            </button>
+
+            <button class="custom-option" type="button" role="option"
+                    data-select="barber"
+                    data-value="No preference"
+                    data-title-en="No preference"
+                    data-title-fr="Aucune préférence"
+                    data-sub-en="Best available barber for the selected service and time."
+                    data-sub-fr="Le meilleur barbier disponible pour le service et l’heure choisis.">
+              <span class="option-copy">
+                <strong data-en="No preference" data-fr="Aucune préférence">No preference</strong>
+                <small data-en="Best available barber for the selected service and time." data-fr="Le meilleur barbier disponible pour le service et l’heure choisis.">Best available barber for the selected service and time.</small>
+              </span>
+            </button>
+          </div>
+        </div>
         <label>
           <span data-en="Message" data-fr="Message">Message</span>
           <textarea name="message" placeholder="Tell us which service you want and your preferred time."></textarea>
